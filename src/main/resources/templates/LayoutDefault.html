@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"/>
+<title>	Create Title</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+<link rel="stylesheet" href="/css/bootstrap-datepicker.standalone.min.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm  box-shadow mb-3" id="nav">
+	    	<div class="container">
+	    		 <a class="navbar-brand" ><img src="/img/icon.png" width="30" height="30" class="d-inline-block align-top" alt=""></a>
+	             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+	                     aria-expanded="false" aria-label="Toggle navigation">
+	             	<span class="navbar-toggler-icon"></span>
+	            </button>
+				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+	                  
+	             	<ul class="navbar-nav flex-grow-1">
+	             		<li class="nav-item">
+	                    	<a id="Charge" class="nav-link text-white">Charge</a>
+	                	</li>
+	
+	            	</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div id ="bm" class="container">
+		<section layout:fragment="RenderBody">
+		</section>
+	 </div>
+	<footer class="footer text-white" id="footer">
+	
+	        <div class="container">
+	            &copy; 2020 - Charge - Evelyn Juliane
+	        </div>
+	</footer>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.br.min.js"></script>
+<script src="/js/jquery.maskMoney.min.js"></script>
+<script src="/js/index.js"></script>
+</body>
+</html>
