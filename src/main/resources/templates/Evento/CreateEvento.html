@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	   layout:decorator="LayoutDefault">
+
+<section layout:fragment="RenderBody">
+	<form class="card" method="POST" action="/casas" th:object="${evento}">
+		
+		<div class="card card-body" id="new">
+			<div class= "clearfix">
+				<h2 class="card-title aw-titulo-card">Novo Evento</h2>
+				<a id="link" class="btn btn-link" href="/casas">Voltar a Pesquisa</a>
+			</div>
+		</div>
+		<div class="card card-body">
+			<div class="form-group row" >
+				<label for="nome" class="col-sm-2 control-label">Nome</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="nome" name="nome" placeholder="ex: Avenged Sevenfold " th:field="*{nome}">
+				</div>
+			</div>
+			<div class="form-group row" >
+				<label for="data" class="col-sm-2 control-label">Data de Vencimento</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="data" name="data" placeholder="ex: 28/02/2000 " 
+						th:field="*{data}"  th:classappend="${#fields.hasErrors('data')} ? is-invalid"
+						data-provide="datepicker" data-date-format="dd/mm/yyyy"
+						data-date-autoclose="true" data-date-today-highlight="true" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="categoria" class="col-sm-2 control-label">Categoria</label>
+				<div class="col-sm-2">
+					<select class="form-control" id="categoria" name="categoria" th:field="*{categoria}">
+						<option th:each="categoria : ${allCategorias}" 
+								th:value="${categoria}" th:text = "${categoria.description}"></option>
+					</select>
+				</div>
+					
+			</div>	
+			
+			<div class="form-group align-self-center">
+				<div class="col-sm-offset-6 col-sm-5">
+					<button type="submit" id="button">Salvar</button>
+			    </div>
+			</div>
+		</div>
+	</form>
+</section>
