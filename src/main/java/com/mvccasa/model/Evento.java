@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,7 +30,9 @@ public class Evento {
 	@NotNull(message = "Error: Nome é um campo obrigatório!")
 	private String nome;
 	
+	@NotNull(message = "Error: Não pode criar um evento sem ter casa de show cadastrada!")
 	@ManyToOne
+	@JoinColumn(name="casa", nullable=false)
 	private Casa casa;
 	
 	@Enumerated(EnumType.STRING)
@@ -52,6 +55,9 @@ public class Evento {
 	@DecimalMax(value = "9999999.99", message = "Error: Valor não pode ser maior que 'R$9.999.999,99' !")
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorIngresso;
+	
+	private String img;
+
 
 	public Long getId() {
 		return id;
@@ -116,6 +122,15 @@ public class Evento {
 	public void setValorIngresso(BigDecimal valorIngresso) {
 		this.valorIngresso = valorIngresso;
 	}
+	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 	
 	@Override
 	public int hashCode() {

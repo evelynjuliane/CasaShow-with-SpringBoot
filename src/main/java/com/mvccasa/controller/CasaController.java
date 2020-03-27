@@ -52,7 +52,7 @@ public class CasaController {
     	}
     	try {
     		services.save(casa);
-    		attributes.addFlashAttribute("menssage", "Título salvo com sucesso!");
+    		attributes.addFlashAttribute("menssage", "Casa salva com sucesso!");
     		return "redirect:/casas/create";
 		} catch (IllegalArgumentException e) {
 			return "Casa/CreateCasa";
@@ -68,7 +68,7 @@ public class CasaController {
 		return mv;
 	}
     //DELETE
-    @RequestMapping("/delete/{id}")
+    @RequestMapping(path = "/delete/{id}")
     public String delete(@PathVariable("id") Casa casa) {
     	services.delete(casa);
         return "redirect:/casas";

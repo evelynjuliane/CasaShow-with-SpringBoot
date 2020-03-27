@@ -9,7 +9,7 @@
 <div class="card">
 		<div class="card-header ">
 			<h1>Pesquisa de Evento</h1>
-			<a id="link" class="btn btn-link" href="/casas/create">Criar novo Evento</a>
+			<a id="link" class="btn btn-link" href="/eventos/create">Criar novo Evento</a>
 		</div>
 	
 	<div class="card-body">
@@ -29,8 +29,10 @@
 		<table class="table table-bordered table-striped">
 			<tr>
 				<th class="text-center">#</th>
+				<th class="text-center">Img</th>
 				<th class="text-center">Nome</th>
 				<th class="text-center">Casa</th>
+				<th class="text-center">Local</th>
 				<th class="text-center">Data</th>
 				<th class="text-center">Hora</th>
 				<th class="text-center">Quantidade de Ingresso</th>
@@ -43,14 +45,21 @@
 			<tbody>
 				<tr th:each="evento : ${eventos}">
 					<td class="text-center" th:text="${evento.id}"></td>
-					<td th:text="${evento.nome}"></td>
+					<td></td>
+					<td><img th:src=/eventos/mostrar/{img}(img=${{evento.img}})} width="100px"></td>
+					<td class="text-center" th:text="${{evento.casa.nome}}"></td>
+					<td class="text-center" th:text="${{evento.casa.local}}"></td>
 					<td class="text-center" th:text="${{evento.data}}"></td>
+					<td class="text-center" th:text="${{evento.hora}}"></td>
+					<td class="text-center" th:text="${{evento.qtdIngresso}}"></td>
+					<td class="text-center" th:text="${{evento.valorIngresso}}"></td>
+					<td class="text-center" th:text="${{evento.categoria}}"></td>
 					<td>
-						<a class="btn btn-link btn-xs" th:href="@{/evento/{id}(id=${{evento.id}})}"
+						<a class="btn btn-link btn-xs" th:href="@{/eventos/{id}(id=${{evento.id}})}"
 							title="Editar" rel="tooltip" data-placement="top">
 							<img src="/img/icons8-editar-propriedade-32.png" />
 						</a>
-						<a class="btn btn-link btn-xs" th:href="@{/evento/delete/{id}(id=${{evento.id}})}"
+						<a class="btn btn-link btn-xs" th:href="@{/eventos/delete/{id}(id=${{evento.id}})}"
 								title="Deletar" rel="tooltip" data-placement="top">
 								<img src="/img/icons8-excluir-32.png" />
 						</a>
@@ -58,7 +67,7 @@
 					</td>
 					 </tr>
 					<tr>
-					 	<td colspan="6" th:if="${#lists.isEmpty(casas)}">Nenhum evento foi encontrado</td>
+					 	<td colspan="6" th:if="${#lists.isEmpty(eventos)}">Nenhum evento foi encontrado</td>
 					 </tr>
 	
 			</tbody>

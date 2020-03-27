@@ -6,7 +6,16 @@
 
 <section layout:fragment="RenderBody">
 	<form class="card" method="POST" action="/casas" th:object="${casa}">
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(menssage)}">
+			<button type="button" class="close" data-dismiss = "alert"></button>
+			<span th:text="${menssage}"></span>
+		</div>
 		
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div>
 		<div class="card card-body" id="new">
 			<div class= "clearfix">
 				<h2 class="card-title aw-titulo-card">Nova Casa</h2>
@@ -14,6 +23,7 @@
 			</div>
 		</div>
 		<div class="card card-body">
+			<input type="hidden" th:field="*{id}"/>
 			<div class="form-group row" >
 				<label for="nome" class="col-sm-2 control-label">Nome</label>
 				<div class="col-sm-4">

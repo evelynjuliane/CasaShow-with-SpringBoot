@@ -5,23 +5,44 @@
 	   layout:decorator="LayoutDefault">
 
 <section layout:fragment="RenderBody">
-	<form class="card" method="POST" action="/casas" th:object="${evento}">
+	<form class="card" method="POST" action="/eventos" enctype="multipart/form-data" th:object="${evento}" >
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(menssage)}">
+		<button type="button" class="close" data-dismiss = "alert"></button>
+			<span th:text="${menssage}"></span>
+		</div>
+		
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div>
 		
 		<div class="card card-body" id="new">
 			<div class= "clearfix">
 				<h2 class="card-title aw-titulo-card">Novo Evento</h2>
-				<a id="link" class="btn btn-link" href="/casas">Voltar a Pesquisa</a>
+				<a id="link" class="btn btn-link" href="/eventos">Voltar a Pesquisa</a>
 			</div>
 		</div>
 		<div class="card card-body">
+			<input type="hidden" th:field="*{id}"/>
 			<div class="form-group row" >
 				<label for="nome" class="col-sm-2 control-label">Nome</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="nome" name="nome" placeholder="ex: Avenged Sevenfold " th:field="*{nome}">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label for="casa" class="col-sm-2 control-label">Casa de Show</label>
+				<div class="col-sm-2">
+					<select class="form-control" id="casa" name="casa" th:field="*{casa}">
+						<option th:each="casa : ${allCasas}" 
+								th:value="${casa.id}" th:text = "${casa.nome}"></option>
+					</select>
+				</div>
+					
+			</div>	
 			<div class="form-group row" >
-				<label for="data" class="col-sm-2 control-label">Data de Vencimento</label>
+				<label for="data" class="col-sm-2 control-label">Data do evento</label>
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="data" name="data" placeholder="ex: 28/02/2000 " 
 						th:field="*{data}"  th:classappend="${#fields.hasErrors('data')} ? is-invalid"
@@ -29,6 +50,15 @@
 						data-date-autoclose="true" data-date-today-highlight="true" />
 				</div>
 			</div>
+			<div class="form-group row" >
+				<label for="nome" class="col-sm-2 control-label">Hora</label>
+				<div class="col-sm-4 ">
+					
+					<input type="time" class="form-control" id="hora" name="hora" th:field="*{hora}">
+
+				</div>
+			</div>
+			
 			<div class="form-group row">
 				<label for="categoria" class="col-sm-2 control-label">Categoria</label>
 				<div class="col-sm-2">
@@ -39,7 +69,25 @@
 				</div>
 					
 			</div>	
-			
+			<div class="form-group row" >
+				<label for="value" class="col-sm-2 control-label" >Valor do Ingresso</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control js-currency" id="value"  name="value" th:field="*{valorIngresso}" 
+						th:classappend="${#fields.hasErrors('valorIngresso')} ? is-invalid" >
+				</div>
+			</div>
+			<div class="form-group row" >
+				<label for="capacidade" class="col-sm-2 control-label">Capacidade</label>
+				<div class="col-sm-4">
+					<input type="number" min="1" class="form-control" id="capacidade" name="capacidade" th:field="*{qtdIngresso}">
+				</div>
+			</div>
+			<div class="form-group row" >
+				<label for="img" class="col-sm-2 control-label">Imagem do Evento</label>
+				<div class="col-sm-4">
+					<input type="file" class="form-control" id="img" name="file" placeholder="Escolha uma imagem">
+				</div>
+			</div>
 			<div class="form-group align-self-center">
 				<div class="col-sm-offset-6 col-sm-5">
 					<button type="submit" id="button">Salvar</button>

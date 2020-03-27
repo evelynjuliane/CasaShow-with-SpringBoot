@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mvccasa.model.Casa;
 import com.mvccasa.model.Categorias;
 import com.mvccasa.model.Evento;
+import com.mvccasa.repository.Casas;
 import com.mvccasa.repository.EventoFilter;
 import com.mvccasa.services.EventoServices;
 
@@ -24,9 +27,13 @@ import com.mvccasa.services.EventoServices;
 @RequestMapping("/eventos")
 public class EventoController {
 	
+	
+	
 	@Autowired
 	private EventoServices services; 
 	
+	@Autowired 
+	private Casas repository;
 	
 	@RequestMapping
 	public ModelAndView index(@ModelAttribute("filter") EventoFilter filter) {
@@ -42,20 +49,19 @@ public class EventoController {
 	@RequestMapping("/create")
     public ModelAndView create() {
     	ModelAndView mv = new ModelAndView("/Evento/CreateEvento");
-    	mv.addObject(new Casa());
+    	mv.addObject(new Evento());
         return mv;
     }
 	
 	//SAVE
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@Validated Evento evento, Errors errors, RedirectAttributes attributes) {
+    public String save(@Validated Evento evento, Errors errors, RedirectAttributes attributes, @RequestParam("file") MultipartFile file ) {
     	
     	if(errors.hasErrors()) {
     		return "/Evento/CreateEvento";
     	}
     	try {
-    		services.save(evento);
-    		attributes.addFlashAttribute("menssage", "Evento salvo com sucesso!");
+    		services.save(evento,attributes, file);
     		return "redirect:/eventos/create";
 		} catch (IllegalArgumentException e) {
 			return "/Evento/CreateEvento";
@@ -74,6 +80,16 @@ public class EventoController {
     public String delete(@PathVariable("id") Evento evento) {
     	services.delete(evento);
         return "redirect:/eventos";
+    }
+    //
+    //@RequestMapping("/mostrar/{id}")
+    //public byte[] mostrar(@PathVariable("img") String img) {
+    	//services.mostrar(img);
+    //}
+   //
+    @ModelAttribute("allCasas")
+    public List<Casa> allCasas(){
+    	return repository.findAll();
     }
     
     @ModelAttribute("allCategorias")

@@ -16,7 +16,7 @@ public class Casa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="casa")
 	List<Evento> evento ;
 	
 	private String nome;

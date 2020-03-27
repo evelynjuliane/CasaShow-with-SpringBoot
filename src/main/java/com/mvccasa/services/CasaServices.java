@@ -27,7 +27,7 @@ public class CasaServices {
 	}
 	
 	public void delete(Casa casa) {
-		casas.delete(casa);
+		this.casas.delete(casa);
 			
 	}
 }
