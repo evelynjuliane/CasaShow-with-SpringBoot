@@ -45,7 +45,7 @@
 			<tbody>
 				<tr th:each="evento : ${eventos}">
 					<td class="text-center" th:text="${evento.id}"></td>
-					<td><img src="7icons8-bloqueio-de-caixa-de-correio-30.png" width="50px"></td>
+					<td><img th:src="'img/' + ${evento.img}" width="50px"></td>
 					<td class="text-center" th:text="${{evento.nome}}"></td>
 					<td class="text-center" th:text="${{evento.casa.nome}}"></td>
 					<td class="text-center" th:text="${{evento.casa.local}}"></td>
