@@ -1,5 +1,6 @@
 package com.mvccasa.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -66,9 +68,9 @@ public class EventoController {
 		} catch (IllegalArgumentException e) {
 			return "/Evento/CreateEvento";
 		}
-	    
-    	
+    
     }
+    
     @RequestMapping("{id}")
     public ModelAndView edit(@PathVariable("id") Evento evento) {
     	ModelAndView mv = new ModelAndView("/Evento/CreateEvento");
@@ -81,12 +83,14 @@ public class EventoController {
     	services.delete(evento);
         return "redirect:/eventos";
     }
-    //
-    //@RequestMapping("/mostrar/{id}")
-    //public byte[] mostrar(@PathVariable("img") String img) {
-    	//services.mostrar(img);
-    //}
-   //
+    
+    @RequestMapping("/mostrar/{id}")
+    @ResponseBody
+    public byte[] mostrar(@PathVariable("img") String img) throws IOException {
+    	System.out.println(services.mostrar(img));
+    	return services.mostrar(img);
+    }
+   
     @ModelAttribute("allCasas")
     public List<Casa> allCasas(){
     	return repository.findAll();

@@ -35,7 +35,7 @@
 				<th class="text-center">Local</th>
 				<th class="text-center">Data</th>
 				<th class="text-center">Hora</th>
-				<th class="text-center">Quantidade de Ingresso</th>
+				<th class="text-center">Qtd Ingressos</th>
 				<th class="text-center">Valor de Ingresso</th>
 				<th class="text-center">Categoria</th>
 				<th>Ações</th>
@@ -45,8 +45,8 @@
 			<tbody>
 				<tr th:each="evento : ${eventos}">
 					<td class="text-center" th:text="${evento.id}"></td>
-					<td></td>
-					<td><img th:src=/eventos/mostrar/{img}(img=${{evento.img}})} width="100px"></td>
+					<td><img src="7icons8-bloqueio-de-caixa-de-correio-30.png" width="50px"></td>
+					<td class="text-center" th:text="${{evento.nome}}"></td>
 					<td class="text-center" th:text="${{evento.casa.nome}}"></td>
 					<td class="text-center" th:text="${{evento.casa.local}}"></td>
 					<td class="text-center" th:text="${{evento.data}}"></td>

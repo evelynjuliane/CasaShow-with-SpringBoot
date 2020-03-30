@@ -1,5 +1,6 @@
 package com.mvccasa.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,9 +62,17 @@ public class EventoServices {
 		eventos.delete(evento);
 		
 	}
+	
+	public byte[] mostrar(String img) throws IOException {
+		File imgFile = new File(path + img);
+		
+		if(img != null || img.trim().length() > 0) {
+			
+				return Files.readAllBytes(imgFile.toPath());
+		}
+		return null;
+	}
 
-	//public void mostrar(String img) {
-		//File imgFile = new File(path);
-	//}
+
 	
 }

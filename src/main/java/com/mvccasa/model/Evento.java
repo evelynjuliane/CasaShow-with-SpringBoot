@@ -42,7 +42,7 @@ public class Evento {
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
-	@DateTimeFormat(pattern = "hh:mm")
+	@DateTimeFormat(pattern = "HH:mm")
 	@Temporal(TemporalType.TIME)
 	private Date hora;
 
